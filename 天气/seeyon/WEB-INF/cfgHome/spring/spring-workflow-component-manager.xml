@@ -10,7 +10,7 @@
     <bean id="templateDao" class="com.seeyon.ctp.common.template.dao.TemplateDaoImpl" />
     <bean id="templateManager" class="com.seeyon.ctp.common.template.manager.TemplateManagerImpl"/>
 <!--    zhou：扩展-->
-<!--    <bean id="extendTemplateManagerImpl" class="com.seeyon.ctp.common.template.manager.ExtendTemplateManagerImpl"/>-->
+    <bean id="extendTemplateManager" class="com.seeyon.ctp.common.template.manager.ExtendTemplateManagerImpl"/>
     <bean id="templateRecentBatchTaskManager" class="com.seeyon.ctp.common.template.manager.TemplateRecentBatchTaskManager" />
     <bean id="templateRecentJob" class="com.seeyon.ctp.common.template.quartz.TemplateRecentJob" />
     <bean id="templateListener" class="com.seeyon.ctp.common.template.listener.TemplateListener" />

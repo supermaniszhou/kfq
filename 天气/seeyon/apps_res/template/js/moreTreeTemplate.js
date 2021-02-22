@@ -59,7 +59,8 @@ function initSearch() {
 		showData = [];
 		var catagerIds = [];
 		//最近使用
-		var templateMan = new templateManager();
+		//zhou:修改成扩展的
+		var templateMan = new extendTemplateManager();
 		var recentUseTempaltes = templateMan.getRecentUseTemplate(category,recent);
 		var recentUseTemplateData = getFinallyShowData(-1, recentUseTempaltes);
 		addShowData(showData, catagerIds, recentUseTemplateData);
