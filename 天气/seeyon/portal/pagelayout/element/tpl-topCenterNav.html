@@ -1,0 +1,54 @@
+<!-- 顶部中间的空间导航 -->
+<script id="tpl-topCenterNav" type="text/html">
+    {{# if(vPortal.themeHotspots && vPortal.themeHotspots.topCenterSpaceNav && vPortal.themeHotspots.topCenterSpaceNav!=undefined && vPortal.themeHotspots.topCenterSpaceNav.portalNavMax !== null){ var maxShowedNav = Number(vPortal.themeHotspots.topCenterSpaceNav.portalNavMax) } else{ var maxShowedNav = 3; } }}
+    {{# var len = d.length > maxShowedNav ? maxShowedNav : d.length; }}
+    {{# if(!(len == 1 && vPortal.portalType==3)){ }}
+    <div class="topCenterNav navHotspotsArea{{# if(vPortal.subPortal=='true'){ }} noRightTopCenterNav{{#} }}">
+        <ul class="showedSpaceNav" id="showedNav">
+            {{# for(var i = 0; i < len; i++){ }}
+            {{# var navName = d[i]["navName"] || d[i]["spaceName"];}}
+            {{# navName = navName.escapeHTML(true) }}
+            {{# var navId = d[i]["id"] || d[i]["spaceId"];}}
+            {{# var _navWidth = maxShowedNav >= 3 ? 100 : 400; }}
+
+            {{# if(maxShowedNav >= 3 ){ }}
+            {{# var _navName = navName.length > 6 ? (navName.substring(0,(navName.indexOf("(")==-1?navName.length:navName.indexOf("(")))).substring(0, 6) : navName.substring(0,(navName.indexOf("(")==-1?navName.length:navName.indexOf("("))); }}
+            {{# }else{ }}
+            {{# var _navName = navName.length > 40 ? (navName.substring(0,(navName.indexOf("(")==-1?navName.length:navName.indexOf("(")))).substring(0, 40) : navName.substring(0,(navName.indexOf("(")==-1?navName.length:navName.indexOf("("))); }}
+            {{# } }}
+
+            <li id="spaceLi_{{ navId }}" {{#  if(len == 1 && vPortal.portalType==3) { }} style="display:none;max-width: {{ _navWidth }}px" {{# }else{ }}style = "max-width:{{ _navWidth }}px"{{# } }} {{#  if(i == 0) { }} class="current" {{# } }} title="{{ navName }}" onclick="javascript:vPortalMainFrameElements.topCenterNav.showNavigation({{i}},this)">
+            <div class="navName">{{ _navName }}</div>
+            <div class="navBottomBorder"></div>
+            </li>
+            {{# } }}
+        </ul>
+        {{# if(d.length > maxShowedNav){ }}
+        <div class="moreSpaceNav" id="moreSpaceNav" onmouseenter="javascript:showMoreSpaceNavList(this)" onmouseleave="hideMoreSpaceNavList(this)">
+            <div class="moreSpaceNavArrow"><i class="vportal vp-arrow-down-serif"></i></div>
+            <iframe id="topCenterNav_iframe" class="topCenterNav_iframe" frameborder="0"></iframe>
+            <div class="moreSpaceNavList" id="moreSpaceNavList">
+               <ul>
+                    {{# for(var i = maxShowedNav; i < d.length; i++){ }}
+                    {{# var navId = d[i]["id"] || d[i]["spaceId"];}}
+                    {{# var navName = d[i]["navName"] || d[i]["spaceName"];}}
+                    {{# navName = navName.escapeHTML(true) }}
+                    <li id="spaceLi_{{ navId }}" title="{{ navName }}" onclick="javascript:vPortalMainFrameElements.topCenterNav.showNavigation({{i}},this)">
+                        {{# if(d[i]["icon"] && d[i]["icon"].indexOf("/fileUpload.do") > -1){ }}
+                        <div class="navIcon"><img src="{{ _ctxPath + d[i]['icon'] }}" /></div>
+                        {{#}else if(d[i]["icon"]){ }}
+                        <div class="navIcon"><i class="vportal vp-{{ d[i]['icon'] }}"></i></div>
+                        {{# } }}
+                        <div class="navName">{{ navName }}</div>
+                    </li>
+                    {{# } }}
+                    <div class="clearFix"></div>
+                </ul>
+                <div class="square"></div>
+            </div>
+        </div>
+        {{# } }}
+        <div class="clearFix"></div>
+    </div>
+    {{# } }}
+</script>
