@@ -683,9 +683,11 @@ public class MyTempleteSection extends BaseSectionImpl {
                         LOG.error("", e);
                     }
                     StringBuilder sb = new StringBuilder(templeteSubject);
-                    sb.append("(");
-                    sb.append(account != null ? account.getShortName() : "");
-                    sb.append(")");
+                    //[开发区] zhou：注释掉  2021-02-23
+
+//                    sb.append("(");
+//                    sb.append(account != null ? account.getShortName() : "");
+//                    sb.append(")");
                     templeteSubject = sb.toString();
                 }
                 item.setName(templeteSubject.toString());
@@ -696,6 +698,7 @@ public class MyTempleteSection extends BaseSectionImpl {
 
     /**
      * 查询配置表中的模板，包含新建的
+     *
      * @param category
      * @param count
      * @return
