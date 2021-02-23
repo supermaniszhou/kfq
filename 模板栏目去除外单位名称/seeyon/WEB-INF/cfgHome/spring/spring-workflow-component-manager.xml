@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans default-autowire="byName">
+    <bean id="affairDao" class="com.seeyon.ctp.common.affair.dao.AffairDaoImpl" />
+    <bean id="hisAffairDao" class="com.seeyon.ctp.common.affair.dao.HisAffairDaoImpl" />
+    <bean id="affairManager" class="com.seeyon.ctp.common.affair.manager.AffairManagerImpl" />
+    <bean id="hisAffairManager" class="com.seeyon.ctp.common.affair.manager.HisAffairManagerImpl" />
+    
+    <!-- ==========================模板组件start ========================== -->
+    <bean id="templateDao" class="com.seeyon.ctp.common.template.dao.TemplateDaoImpl" />
+    <bean id="templateManager" class="com.seeyon.ctp.common.template.manager.TemplateManagerImpl"/>
+<!--    zhou：扩展-->
+    <bean id="extendTemplateManager" class="com.seeyon.ctp.common.template.manager.ExtendTemplateManagerImpl"/>
+    <bean id="templateRecentBatchTaskManager" class="com.seeyon.ctp.common.template.manager.TemplateRecentBatchTaskManager" />
+    <bean id="templateRecentJob" class="com.seeyon.ctp.common.template.quartz.TemplateRecentJob" />
+    <bean id="templateListener" class="com.seeyon.ctp.common.template.listener.TemplateListener" />
+    <!-- ==========================模板组件end ========================== -->
+    
+    <!-- ==========================跟踪组件 start ========================== -->
+    <bean id="trackManager" class="com.seeyon.ctp.common.track.manager.CtpTrackMemberManagerImpl"/>
+    <bean id="trackdao" class="com.seeyon.ctp.common.track.dao.CtpTrackMemberDaoImpl" />
+    <!-- ==========================跟踪组件end ========================== -->
+    
+    <!-- ==========================节点权限组件start ========================== -->
+    <bean id="permissionManager" class="com.seeyon.ctp.common.permission.manager.PermissionManagerImpl">
+        <property name="configManager" ref="configManager"></property>
+    </bean>
+    <bean id="permissionOrganizationEventListener" class="com.seeyon.ctp.common.permission.listener.PermissionOrganizationEventListener"/>
+    <!-- ==========================节点权限组件end ========================== -->
+    <bean id="collProjectManager" class="com.seeyon.ctp.common.affair.manager.CollProjectManagerImpl"></bean>
+    
+    <!-- ==========================常用语组件start ========================== -->
+    <bean id="cpdao" class="com.seeyon.ctp.common.phrase.dao.CommonPhraseDaoImpl" />
+    <bean id="phraseManager" class="com.seeyon.ctp.common.phrase.manager.CommonPhraseManagerImpl">
+        <property name="cpdao" ref="cpdao"></property>
+    </bean>
+    <bean id="phraseOrganizationEventListener"
+        class="com.seeyon.ctp.common.phrase.listener.PhraseOrganizationEventListener">
+    </bean>
+    <!-- ==========================常用语组件end ========================== -->
+    
+    <!-- ==========================流程管理 ==============================-->
+       <bean id="workflowManageDao"
+        class="com.seeyon.ctp.common.workflowmanage.dao.WorkflowManageDaoImpl">
+    </bean>
+     <bean id="workflowManageManager"
+        class="com.seeyon.ctp.common.workflowmanage.manager.WorkflowManageManagerImpl">
+    </bean>
+    <!-- ==========================流程管理  end==============================-->
+    
+    <!-- 流程日志 -->
+    <bean id="detaillogManager" class="com.seeyon.ctp.common.detaillog.manager.DetaillogManagerImpl"></bean>
+
+    <!--代理事项-->
+    <bean id="affairAgentMangager" class="com.seeyon.ctp.common.affair.manager.AffairAgentMangagerImpl"/>
+    
+    <!-- 批处理 -->
+    <bean id="batchManager" class="com.seeyon.ctp.common.batch.manager.BatchManagerImpl">
+        <!-- 处理后不允许撤销的节点权限 -->
+        <property name="cannotRepealList">
+            <list>
+                <value>formaudit</value><!-- 表单审核 -->
+                <value>newsaudit</value><!-- 新闻审核 -->
+                <value>bulletionaudit</value><!-- 公告审核 -->
+                <value>vouch</value><!-- 核定 -->
+            </list>
+        </property>
+    </bean>
+    
+    
+    <!-- 待办数据处理 -->
+    <bean id="pendingManager" class="com.seeyon.ctp.common.affair.manager.PendingManagerImpl"></bean>
+    
+    <!-- 栏目事项管理类 -->
+    <bean name="portalAffairManager" class="com.seeyon.ctp.common.affair.manager.PortalAffairManagerImpl"></bean>    
+    
+    <bean id="collaborationPortlet" class="com.seeyon.ctp.portal.portlet.CollaborationPortlet"></bean>
+    
+    <!-- 磁贴（超期事项） -->
+    <bean id="collaborationOverPortlet" class="com.seeyon.ctp.portal.portlet.CollaborationOverPortlet" />
+    <!-- 磁帖 start-->
+    <bean name="templateCategory" class="com.seeyon.ctp.portal.portlet.TemplateCategory"/>
+    <bean name="templatePortlet" class="com.seeyon.ctp.portal.portlet.TemplatePortlet"/>
+    <bean name="collaborationCategory" class="com.seeyon.ctp.portal.portlet.CollaborationCategory"/>
+    <!-- 磁帖    end -->
+    
+    <!-- 协同和公文相关的工作流程数据修复类 -->
+    <bean id="workFlowDataRepairManager" class="com.seeyon.ctp.workflow.repair.WorkFlowDataRepairManagerImpl"></bean>
+    
+    <!-- 催办处理 -->
+    <bean id="hastenManager" class="com.seeyon.ctp.common.supervise.manager.HastenManagerImpl"></bean>
+    
+    <!-- 流程知识中心 -->
+    <bean id="processAssetsManager" class="com.seeyon.ctp.common.processassets.manager.ProcessAssetsManagerImpl"></bean>
+    <bean id="processAssetsEventListener" class="com.seeyon.ctp.common.processassets.listener.ProcessAssetsEventListener"></bean>
+    
+    <!-- 个人中心流程信息 -->
+    <bean id="myProcessInformationManager" class="com.seeyon.ctp.common.template.manager.MyProcessInformationManagerImpl"></bean>
+    
+    <!-- 节点动作 -->
+    <bean id="ctpPermissionOperationManager" class="com.seeyon.ctp.common.permission.operation.manager.CtpPermissionOperationManagerImpl"></bean>
+    <bean id="customerOperationManager" class="com.seeyon.ctp.common.permission.operation.manager.CustomerOperationManagerImpl"></bean>
+    
+    
+    <!-- 表单处理页面布局 -->
+    <bean id="permissionLayoutManager" class="com.seeyon.ctp.common.permission.manager.PermissionLayoutManagerImpl"></bean>
+    <!-- 节点态度 -->
+    <bean id="attitudeManager" class="com.seeyon.ctp.common.permission.manager.AttitudeManagerImpl"></bean>
+    
+    <!-- 自定义节点权限加载器 -->
+    <bean id="customerPermissionManager" class="com.seeyon.ctp.common.permission.manager.CustomerPermissionManagerImpl"></bean>
+    
+    <!-- 催办 -->
+    <bean id="hastenDao" class="com.seeyon.ctp.common.supervise.dao.HastenDaoImpl"></bean>
+    <!-- 待办 -->
+    <bean id="pendingDao" class="com.seeyon.ctp.common.affair.dao.PendingDaoImpl"></bean>
+    <!-- 流程知识中心 -->
+    <bean id="processAssetsDao" class="com.seeyon.ctp.common.processassets.dao.ProcessAssetsDaoImpl"></bean>
+    <!-- 个人中心 -->
+    <bean id="myProcessInformationDao" class="com.seeyon.ctp.common.template.dao.MyProcessInformationDaoImpl"></bean>
+    <!-- 节点动作 -->
+    <bean id="ctpPermissionOperationDao" class="com.seeyon.ctp.common.permission.operation.dao.CtpPermissionOperationDaoImpl"></bean>
+    
+    <!-- 表单处理页面布局 -->
+    <bean id="permissionLayoutDao" class="com.seeyon.ctp.common.permission.dao.PermissionLayoutDaoImpl"></bean>
+
+    <bean id="terminateColSuperviseJob" class="com.seeyon.ctp.common.affair.quartz.TerminateColSupervise">
+    </bean>
+    <bean id="processCycRemindQuartzJob" class="com.seeyon.ctp.common.affair.quartz.ProcessCycRemind">
+    </bean>
+    <bean id="affairIsOvertopTimeJob" class="com.seeyon.ctp.common.affair.quartz.IsOvertopTimeJob">
+    </bean>
+    
+    <!-- ==========================BPM门户start ========================== -->
+    <bean id="bpmPortalManager" class="com.seeyon.ctp.bpm.portal.manager.BpmPortalManagerImpl"></bean>
+    
+    <!-- ==========================BPM门户end ========================== -->
+    
+    <!-- 消息规则 -->
+	<bean id="messageRuleManager"  class="com.seeyon.ctp.workflow.messageRule.manager.MessageRuleManagerImpl"></bean>
+	<bean id="messageRuleDao"  class="com.seeyon.ctp.workflow.messageRule.dao.MessageRuleDaoImpl"></bean>
+    
+    <bean id="workflowComponentSystemInitializer" class="com.seeyon.ctp.workflow.component.Manager.WorkflowComponentSystemInitializer">
+    	<!-- 设置sortOrder，让初始化提前 -->
+    	<property name="sortOrder" value="200" /> 
+    </bean>
+    <bean class="com.seeyon.ctp.common.content.workflow.CTPAffairEventListenerImpl" />
+    
+    <!-- 流程预测 -->
+    <bean id="workflowPredictionManager" class="com.seeyon.ctp.workflow.prediction.manager.WorkflowPredictionManagerImpl"></bean>
+    
+    <!-- 工作流事件init接口(微服务分组接口@RefreshInterfacesAfterUpdate扫描需要注册bean) -->
+    <bean id="workflowEventManager" class="com.seeyon.ctp.workflow.event.WorkflowEventManager"></bean>
+
+</beans>
