@@ -644,7 +644,9 @@ public class TemplateController extends BaseController {
     		String shortName="";
     		if(!ctpTemplate.getOrgAccountId().equals(-1l) && null != ctpTemplate.getOrgAccountId() && !la.equals(ctpTemplate.getOrgAccountId()) && ctpTemplate.isSystem()){
     			 shortName= orgManager.getAccountById(ctpTemplate.getOrgAccountId()).getShortName();
-    			rut.setName(ctpTemplate.getSubject() +"("+shortName+")");
+    			 //zhou
+    			rut.setName(ctpTemplate.getSubject());
+//    			rut.setName(ctpTemplate.getSubject() +"("+shortName+")");
     		}else{
     			rut.setName(ctpTemplate.getSubject());
     		}
@@ -1614,7 +1616,9 @@ public class TemplateController extends BaseController {
             		shortName = orgAccount.getShortName();
             	}
                 if (Strings.isNotBlank(shortName)) {
-                    templateTreeVO.setName(ctpTemplate.getSubject() + "(" + shortName + ")");
+                	//zhou
+                    templateTreeVO.setName(ctpTemplate.getSubject() );
+//                    templateTreeVO.setName(ctpTemplate.getSubject() + "(" + shortName + ")");
                 } else {
                     templateTreeVO.setName(ctpTemplate.getSubject());
                 }
